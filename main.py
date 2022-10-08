@@ -1,4 +1,5 @@
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtTest
+from time import sleep
 
 # Iniciamos la app
 app = QtWidgets.QApplication([])
@@ -52,15 +53,27 @@ def generar_file():
             # Escribimos los bytes en el archivo
             f.write(allBytes)
 
+            # Mensaje de exito
+            comp.exito.setText("¡¡¡Archivo generado!!!")
+            # Paramos ejecucion 2 segundos
+            QtTest.QTest.qWait(3000)
+            # Desaparecemos mensaje
+            comp.exito.setText("")
+    # Si ocurre algun error
     except Exception as e:
+        # Mostramos mensaje de error
         comp.error.setText(f"Ocurrió un Error: {e}")
+        # Paramos ejecucion 2 segundos
+        QtTest.QTest.qWait(3000)
+        # Desaparecemos mensaje
+        comp.error.setText("")
 
 
 def update_res(pos: int):
     try:
-        # Validar Operando válido y generamos un error si este es mayor a 0xE
+        # Validar Operando válido y generamos un error si este es mayor a 0xE a la vez dará error si no es un hexadevimal
         validadando_operando = f'''
-if int(comp.ope_{pos}.text(), 16) > 0xE:
+if int(comp.ope_{pos}.text(), 16) > 0xF:
     raise ValueError
 '''
         exec(validadando_operando)
