@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="instruction">
+    <file>tabladenemonicos.PNG</file>
+  </qresource>
+</RCC>
