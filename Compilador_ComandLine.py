@@ -150,7 +150,7 @@ def get_operando(i: int) -> int:
             # Llevar a formato hexadecimal -> Esto puede generar un error si no se ingresa un valor hexadecimal
             operando = int(operando, 16)
 
-            # Restringir a operandos entre 0 y 9
+            # Restringir a operandos entre 0 y A
             if operando > 0xF or operando < 0:
                 raise ValueError
             
