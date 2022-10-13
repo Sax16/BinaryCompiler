@@ -71,7 +71,7 @@ def generar_file():
 
 def update_res(pos: int):
     try:
-        # Validar Operando válido y generamos un error si este es mayor a 0x9  o menor a 0, a la vez dará error si no es un hexadevimal
+        # Validar Operando válido y generamos un error si este es mayor a 0xF  o menor a 0, a la vez dará error si no es un hexadevimal
         validadando_operando = f'''
 if int(comp.ope_{pos}.text(), 16) < 0x0 or int(comp.ope_{pos}.text(), 16) > 0xF:
     raise ValueError
