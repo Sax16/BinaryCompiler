@@ -71,9 +71,9 @@ def generar_file():
 
 def update_res(pos: int):
     try:
-        # Validar Operando válido y generamos un error si este es mayor a 0xE a la vez dará error si no es un hexadevimal
+        # Validar Operando válido y generamos un error si este es mayor a 0x9  o menor a 0, a la vez dará error si no es un hexadevimal
         validadando_operando = f'''
-if int(comp.ope_{pos}.text(), 16) > 0xF:
+if int(comp.ope_{pos}.text(), 16) < 0x0 or int(comp.ope_{pos}.text(), 16) > 0xF:
     raise ValueError
 '''
         exec(validadando_operando)
@@ -83,7 +83,7 @@ if int(comp.ope_{pos}.text(), 16) > 0xF:
         exec(cambiar_direccion)
 
         # Generamos codigo para concatenar el valor del nemonico y del operando en el resultado en mayuscula
-        actualizar_resultado = f'comp.res_{pos}.setText(hex(NEMONICOS[comp.nem{pos}.currentText()])[2].upper() + comp.ope_{pos}.text().upper())'
+        actualizar_resultado = f'comp.res_{pos}.setText(hex(NEMONICOS[comp.nem{pos}.currentText()])[2].upper() + hex(int(comp.ope_{pos}.text(), 16))[2].upper())'
         exec(actualizar_resultado)
     except:
         # Generamos codigo para concatenar el valor del nemonico y del operando invalido con -
@@ -105,7 +105,7 @@ if comp.ope_{pos}.text() == "":
     exec(prev)
 
     # Generamos codigo para concatenar el valor del nemonico y del operando en el resultado
-    actualizar_resultado = f'comp.res_{pos}.setText(valor_hex + comp.ope_{pos}.text().upper())'
+    actualizar_resultado = f'comp.res_{pos}.setText(valor_hex + hex(int(comp.ope_{pos}.text(), 16))[2].upper())'
     exec(actualizar_resultado)
 
 
